@@ -17,6 +17,8 @@ data = json.load(f)
 f.close()
 
 # save all data
+
+
 def save():
     f = open("data.json", 'w')
     json.dump(data, f)
@@ -27,6 +29,8 @@ def save():
     print("Data saved")
 
 # wait x seconds and restart
+
+
 def wait_and_reset(amount=data["waittime"]):
     time.sleep(amount)
     clear()
@@ -37,7 +41,7 @@ def params(command, *args):
     print("Invalid params for:", command)
     for value in args:
         print("[{}]".format(value))
-        wait_and_reset()
+    wait_and_reset()
 
 
 def clear():
@@ -53,6 +57,8 @@ def error():
     wait_and_reset()
 
 # operation select function
+
+
 def operation_select():
     operation = (input("Input operation (open or run)> ")).split(" ")
     # prime opening function
@@ -61,6 +67,7 @@ def operation_select():
     # prime spam function
     elif operation[0] == "run":
         operation = "run"
+    # extra commands
     # change loadtime
     elif operation[0] == "lt":
         try:
@@ -75,7 +82,7 @@ def operation_select():
     # change wait time
     elif operation[0] == "wt":
         try:
-            data["loadtime"] = int(operation[1])
+            data["waittime"] = int(operation[1])
         except ValueError:
             print("Value must be an integer")
             wait_and_reset()
@@ -100,10 +107,31 @@ def operation_select():
     # add url fucntion
     elif operation[0] == "url":
         try:
-            data["loadtime"] = str(operation[1])
+            if operation[1] == "r":
+                for key, values in urls.items():
+                    print("{}: {}".format(key, values))
+                try:
+                    inp = int(input("Select url to remove> "))
+                    del urls[str(inp)]
+                    save()
+                    wait_and_reset()
+                except ValueError:
+                    print("Value must be an integer")
+                    wait_and_reset()
+
+            elif operation[1] == "a":
+                try:
+                    i = len(urls.keys())
+                    urls[str(i+1)] = operation[2]
+                    print("Url added")
+                    save()
+                    wait_and_reset()
+                except IndexError:
+                    params("url", "r(remove)", "a(add) [url]")
+            else:
+                params("url", "r(remove)", "a(add) [url]")
         except IndexError:
-            params("url(add url)", "url")
-        wait_and_reset()
+            params("url", "r(remove)", "a(add) [url]")
     # save data
     elif operation[0] == "s":
         save()
@@ -116,6 +144,8 @@ def operation_select():
     return operation
 
 # runtime select function
+
+
 def length_select():
     try:
         length = int(input("Input desired runtime (seconds)> "))
@@ -126,17 +156,23 @@ def length_select():
     return length
 
 # message select function
+
+
 def message_select():
     message = input("Input message> ")
     return message
 
 # countdown function
+
+
 def countdown(amount):
     for i in range(0, amount):
         print(amount-i)
         time.sleep(1)
 
 # main function (opens sites / or run spam)
+
+
 def run(operation, message, runtime):
     # open urls
     if operation == 'open':
@@ -184,12 +220,15 @@ def run(operation, message, runtime):
         exit()
 
 # define main loop
+
+
 def start():
     print(figlet_format("DarkSGC", font="graffiti") + "Version 1.1\n")
     operation = operation_select()
     message = message_select()
     length = length_select()
     run(operation, message, length)
+
 
 # start main loop
 start()
