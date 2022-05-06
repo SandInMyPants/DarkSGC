@@ -185,7 +185,7 @@ def run(operation, message, runtime):
             countdown(data["loadtime"])
             for key, value in urls.items():
                 pyg.keyDown("CTRL")
-                pyg.press("E")
+                pyg.press("K")
                 pyg.keyUp("CTRL")
                 pyg.typewrite(value)
                 pyg.press("ENTER")
