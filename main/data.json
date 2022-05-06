@@ -1,3 +1,1 @@
-{
-    "loadtime" : 10, "waittime" : 2, "clear_on_start" : "True"
-}
+{"loadtime": 5, "waittime": 5, "clear_on_start": "True"}
