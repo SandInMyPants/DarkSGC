@@ -3,6 +3,10 @@ import json
 from pyfiglet import figlet_format
 import pyautogui as pyg
 import os
+import sys
+import subprocess
+
+subprocess.call(["pip3", "install" ,"-r" ,"requirements.txt"])
 
 # save urls.json do a variable
 f = open("urls.json")
