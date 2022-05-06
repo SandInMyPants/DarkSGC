@@ -16,6 +16,6 @@ Extra commands:
 
 1. lt [length] (chnages load time)
 2. wt [lenth] (changes wait time)
-3. cos [t(True)} || [f (false)] (sets 'clear on start' to true or false)
+3. cos [t(True)] || [f (false)] (sets 'clear on start' to true or false)
 4. url [r(remove)] || [a(add)[url]] (remove url or add url)
 5. s (saves all data)
